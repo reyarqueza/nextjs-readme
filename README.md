@@ -1,5 +1,6 @@
 # Next.js
 
+By using the Next.js framework, optimizations you traditionally manually code in native HTML get written for you by the Next.js framework. So use the framework components instead of native HTML whenvever possible. Below are the most common Next.js components.
 ## next/font
 Next.js downloads font files at build time and hosts them with your other static assets.
 
@@ -20,6 +21,9 @@ Then apply the font via classname.
 </body>
 ```
 
+### Output
+Next.js automatically pre-renders font syntax to ensure **peak Lighthouse scores**, handling the manual optimization details for you.
+
 ## next/image
 ```tsx
 import Image from 'next/image';
@@ -34,6 +38,12 @@ Images are hosted in the /public folder.
 />
 ```
 The width and height attributes specify the ***intrinsic*** dimensions of the image, which are used to calculate the aspect ratio, not the actual rendered size.
+
+### Output
+Next.js automates image optimization.
+
+- **Generates Markup**: Generates srcset and/or picture tags automatically; no manual coding required.
+- **Built-in Optimization**: Handles resizing and compression for you.
 
 ## file-system routing
 Next.js uses file-system routing where folders are used to create nested routes. Each folder represents a route segment that maps to a URL segment.
