@@ -1,72 +1,65 @@
 # Next.js
+## Components
 
-## next/font
+```tsx
+import Image from 'next/image';
+import Link from 'next/link';
+import Form from 'next/form';
+import Script from 'next/script';
+```
+
+### next/font
+
 ```tsx
 import { Lusitana } from 'next/font/google';
 const lusitana = Lusitana({
   weight: ['400', '700'],
-  subsets: ['latin'],
 });
 ```
 
 ```tsx
 <body className={`${lusitana.className}`}>
-  <h1>This will pick up font-weight of 700</h1>
-  <p>This will pick up font-weight of 400</p>
-</body>
 ```
 
-## next/image
-```tsx
-import Image from 'next/image';
-```
-
-```tsx
-<Image
-  src="/hero-desktop.png"
-  width={1000} /* intrinsic dimensions required */
-  height={760}
-  alt="Screenshots of the dashboard project showing desktop version"
-/>
-```
-
-## next/link
-```tsx
-import Link from 'next/link';
-```
-```tsx
-<Link href="/dashboard">Dashboard</Link>
-```
-
-## next/script
-```tsx
-import Script from 'next/script'
-```
-```tsx
-<Script src="/script.js" />
-```
-
-## file-system routing
+## App Router: file-system based router
 Root Segment > Segment > Leaf Segment
 
 ![segments](/segments.png)
 
-### page.tsx
-**default export a React component**:
+### conventions
+
+For all files, **default export a React component** and match the component name with the file.
+> page.tsx
+
 ```tsx
 export default function Page() {
-  return <p>Hello World!</p>;
+  return <p>Hello World I'm a webpage!</p>;
 }
 ```
 
-### layout.tsx
+A summary of the most common files used in App Router:
+- page.tsx
+- layout.tsx
+- loading.tsx
+- not-found.tsx
+- error.tsx
+
+> More listed at https://nextjs.org/docs/app/api-reference/file-conventions
+
+#### layout.tsx
 ![layout.tsx](/shared-layout.avif)
-When a layout.tsx file is present, the content rendered by page.tsx is passed as the children prop to the layout.tsx component.
 
-This layout.tsx file is used as the parent component for its nested routes such as the page.tsx file in subdirectories (customers and invoices).
+For the root layout, name the component **RootLayout**
 
-### partial rendering
-During navigation, only the page components update. The layout does not re-render.
+```tsx
+export default function RootLayout({children}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+```
 
 ### colocation
 In Next.js, “colocation” means keeping all route-related files (components, styles, logic) in the same folder as the route’s main file.
